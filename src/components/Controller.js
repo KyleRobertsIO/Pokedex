@@ -45,12 +45,13 @@ class Controller extends Component {
                 }]
             },
             abilities: [],
+            moves: [],
             loading: true
         };
         this.changePokemon = this.changePokemon.bind(this);
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         axios.get('https://pokeapi.co/api/v2/pokemon/' + pokemon + '/')
             .then(res => {
                 let name = ucFirst(res.data.species.name);
@@ -88,6 +89,16 @@ class Controller extends Component {
                     abilities[i].ability.name = ucFirst(abilities[i].ability.name);
                 }
 
+                let moves = res.data.moves.sort();
+                let movesSorted = [];
+                for(let i = 0; i < moves.length; i++){
+                    movesSorted.push(moves[i].move.name);
+                }
+                // Sort A->Z
+                movesSorted.sort();
+                for(let i = 0; i < movesSorted.length; i++){
+                    console.log(movesSorted[i]);
+                }
 
                 let loading = false;
                 this.setState({
@@ -97,6 +108,7 @@ class Controller extends Component {
                     stats: stats,
                     chartData: chartData,
                     abilities: abilities,
+                    moves: movesSorted,
                     loading: loading
                 });
             })
@@ -141,6 +153,7 @@ class Controller extends Component {
                 for (let i = 0; i < abilities.length; i++) {
                     abilities[i].ability.name = ucFirst(abilities[i].ability.name);
                 }
+
                 let loading = false;
 
                 this.setState({
