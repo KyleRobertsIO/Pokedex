@@ -89,7 +89,7 @@ class Controller extends Component {
                     abilities[i].ability.name = ucFirst(abilities[i].ability.name);
                 }
 
-                let moves = res.data.moves.sort();
+                /*let moves = res.data.moves.sort();
                 let movesSorted = [];
                 for(let i = 0; i < moves.length; i++){
                     movesSorted.push(moves[i].move.name);
@@ -98,7 +98,7 @@ class Controller extends Component {
                 movesSorted.sort();
                 for(let i = 0; i < movesSorted.length; i++){
                     console.log(movesSorted[i]);
-                }
+                }*/
 
                 let loading = false;
                 this.setState({
@@ -108,7 +108,7 @@ class Controller extends Component {
                     stats: stats,
                     chartData: chartData,
                     abilities: abilities,
-                    moves: movesSorted,
+                    //moves: movesSorted,
                     loading: loading
                 });
             })
