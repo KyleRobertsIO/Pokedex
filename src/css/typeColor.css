@@ -1,54 +1,54 @@
-#Normal{
+#type-container #Normal{
     background-color: #a8a77a;
 }
-#Fire{
+#type-container #Fire{
     background-color: #ee8a30;
 }
-#Water{
+#type-container #Water{
     background-color: #6390f0;
 }
-#Electric{
+#type-container #Electric{
     background-color: #f7d02c;
 }
-#Grass{
+#type-container #Grass{
     background-color: #7ac74c;
 }
-#Ice{
+#type-container #Ice{
     background-color: #96d9dc;
 }
-#Fighting{
+#type-container #Fighting{
     background-color: #c22e28;
 }
-#Poison{
+#type-container #Poison{
     background-color: #a33ea1;
 }
-#Ground{
+#type-container #Ground{
     background-color: #e2bf65;
 }
-#Flying{
+#type-container #Flying{
     background-color: #a98ff3;
 }
-#Psychic{
+#type-container #Psychic{
     background-color: #f95587;
 }
-#Bug{
+#type-container #Bug{
     background-color: #a6b91a;
 }
-#Rock{
+#type-container #Rock{
     background-color: #b6a136;
 }
-#Ghost{
+#type-container #Ghost{
     background-color: #735797;
 }
-#Dragon{
+#type-container #Dragon{
     background-color: #6f35fc;
 }
-#Dark{
+#type-container #Dark{
     background-color: #705746;
 }
-#Steel{
+#type-container #Steel{
     background-color: #b7b7ce;
 }
-#Fairy{
+#type-container #Fairy{
     background-color: #d685ad;
 }

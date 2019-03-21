@@ -1,0 +1,43 @@
+<style>
+    div {
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: green;
+        width: 100%;
+        height: 100vh;
+        z-index: 2;
+    }
+</style>
+
+<div id="layer">
+    hello there!
+    <button onclick=hide(this.id)>X</button>
+</div>
+
+<ul id="moves">
+  <li id="study" onclick=show(this.id)>
+        <h1>Title</h1>
+        <p>Some ability text<p>
+  </li>
+  <li id="metal-coat" onclick=show(this.id)>
+        <h1>Title</h1>
+        <p>Some ability text<p>
+  </li>
+  <li id="steel-clear" onclick=show(this.id)>
+        <h1>Title</h1>
+        <p>Some ability text<p>
+  </li>
+</ul>
+
+<script>
+function show(elm){
+    document.getElementById('layer').style.display = "block";
+}
+function hide(elm){
+    document.getElementById('layer').style.display = "none";
+}
+</script>
+
+<!--Making a move effect display-->

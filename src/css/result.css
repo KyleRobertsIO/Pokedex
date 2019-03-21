@@ -1,0 +1,112 @@
+body{
+    background-color: #28253d;
+}
+
+#page-container{
+    margin-top: 48px;
+}
+
+#image-display{
+    padding: 30px 0px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pokemon-image{
+    width: 150px;
+    height: 150px;
+}
+
+#basic-info-container{
+    text-align: center;
+    padding: 20px 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#name{
+    font-family: 'Teko', sans-serif;
+    color: #fff;
+    font-size: 40px;
+}
+
+#type-container{
+    display: flex;
+    color: #000;
+    margin: 10px 0px 0px 0px;
+}
+
+.type{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    margin: 0px 10px 0px 10px;
+    padding: 7px 20px 7px 20px;
+    border-radius: 50px;
+}
+
+#data-container{
+    background-color: #38345c;
+    border-radius: 15px;
+    padding: 20px 20px 20px 20px;
+    margin: 30px 20px 0px 20px;
+}
+
+#section-title{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    text-align: center;
+    margin: 20px 0px 30px 0px;
+    color: #fff;
+    font-size: 24px;
+    background-color: #48416b;
+    padding: 10px 0px;
+    border-radius: 50px;
+}
+
+#flavor-text{
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.25;
+}
+
+#ability-list{
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-weight: lighter;
+    font-size: 16px;
+}
+
+.ability-name{
+    font-weight: bolder;
+    font-size: 20px;
+    margin: 0px 0px 8px 0px;
+}
+
+#hidden-false{
+    color: #fff;
+}
+
+#hidden-true{
+    color: #d941c0;
+}
+
+.ability-effect{
+    font-size: 14px;
+    margin: 0px 0px 10px 10px;
+    line-height: 1.25;
+}
+
+#move-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.move{
+    padding: 5px 0px;
+}

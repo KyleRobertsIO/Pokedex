@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-//import App from './App';
 import Controller from './components/Controller';
 import * as serviceWorker from './serviceWorker';
+import './css/reset.css';
 
 ReactDOM.render(<Controller />, document.getElementById('root'));
 

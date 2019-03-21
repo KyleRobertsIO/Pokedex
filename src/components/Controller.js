@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Display from './Display';
 import Chart from './Chart';
-import AbilityList from './AbilityList';
-import '../css/pokedex.css';
-import '../css/typeColor.css';
+import { getPokemon, moveDetails } from '../js/api.js';
 import '../css/controls.css';
+import '../css/result.css';
+import '../css/moveDetails.css';
+import '../css/typeColor.css';
 
-var pokemon = 'pichu';
+import closeIcon from '../assets/icons/close.svg';
 
-function ucFirst(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+var pokemon = 'aron';
 
 class Controller extends Component {
     constructor(props) {
@@ -21,8 +19,8 @@ class Controller extends Component {
             pokemon: pokemon,
             name: "",
             spriteImage: "",
+            entry: "",
             types: [],
-            stats: [],
             chartData: {
                 labels: ['HP', 'Attack', 'Defence', 'Spa. Attack', 'Spa. Defence', 'Speed'],
                 datasets: [{
@@ -52,140 +50,58 @@ class Controller extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://pokeapi.co/api/v2/pokemon/' + pokemon + '/')
-            .then(res => {
-                let name = ucFirst(res.data.species.name);
-                let spriteImage = res.data.sprites.front_default;
-                let types = res.data.types.reverse();
-                for (let i = 0; i < types.length; i++) {
-                    types[i].type.name = ucFirst(types[i].type.name);
-                }
-                let stats = res.data.stats.reverse();
-
-                let chartData = {
-                    labels: ['HP', 'Attack', 'Defence', 'Spa. Attack', 'Spa. Defence', 'Speed'],
-                    datasets: [{
-                        data: [
-                            stats[0].base_stat,
-                            stats[1].base_stat,
-                            stats[2].base_stat,
-                            stats[3].base_stat,
-                            stats[4].base_stat,
-                            stats[5].base_stat,
-                        ],
-                        backgroundColor: [
-                            'rgba(255, 0, 0, 1.0)',
-                            'rgba(244, 164, 66, 1.0)',
-                            'rgba(255, 206, 0, 1.0)',
-                            'rgba(133, 65, 244, 1.0)',
-                            'rgba(244, 65, 217, 1.0)',
-                            'rgba(65, 223, 244, 1.0)'
-                        ]
-                    }]
-                }
-
-                let abilities = res.data.abilities.reverse();
-                for (let i = 0; i < abilities.length; i++) {
-                    abilities[i].ability.name = ucFirst(abilities[i].ability.name);
-                }
-
-                /*let moves = res.data.moves.sort();
-                let movesSorted = [];
-                for(let i = 0; i < moves.length; i++){
-                    movesSorted.push(moves[i].move.name);
-                }
-                // Sort A->Z
-                movesSorted.sort();
-                for(let i = 0; i < movesSorted.length; i++){
-                    console.log(movesSorted[i]);
-                }*/
-
-                let loading = false;
+        getPokemon(pokemon)
+            .then((obj) => {
                 this.setState({
-                    name: name,
-                    spriteImage: spriteImage,
-                    types: types,
-                    stats: stats,
-                    chartData: chartData,
-                    abilities: abilities,
-                    //moves: movesSorted,
-                    loading: loading
+                    name: obj.name,
+                    spriteImage: obj.sprite,
+                    types: obj.types,
+                    chartData: obj.chartData,
+                    abilities: obj.abilities,
+                    entry: obj.entry,
+                    moves: obj.moves,
+                    loading: obj.loading
                 });
             })
     }
 
     changePokemon() {
-        let newPokemon = document.getElementById('searchInput').value.toLowerCase();
-
-
-        axios.get('https://pokeapi.co/api/v2/pokemon/' + newPokemon + '/')
-            .then(res => {
-                let name = ucFirst(res.data.species.name);
-                let spriteImage = res.data.sprites.front_default;
-                let types = res.data.types.reverse();
-                for (let i = 0; i < types.length; i++) {
-                    types[i].type.name = ucFirst(types[i].type.name);
-                }
-                let stats = res.data.stats.reverse();
-
-                let chartData = {
-                    labels: ['HP', 'Attack', 'Defence', 'Spa. Attack', 'Spa. Defence', 'Speed'],
-                    datasets: [{
-                        data: [
-                            stats[0].base_stat,
-                            stats[1].base_stat,
-                            stats[2].base_stat,
-                            stats[3].base_stat,
-                            stats[4].base_stat,
-                            stats[5].base_stat,
-                        ],
-                        backgroundColor: [
-                            'rgba(255, 0, 0, 1.0)',
-                            'rgba(244, 164, 66, 1.0)',
-                            'rgba(255, 206, 0, 1.0)',
-                            'rgba(133, 65, 244, 1.0)',
-                            'rgba(244, 65, 217, 1.0)',
-                            'rgba(65, 223, 244, 1.0)'
-                        ]
-                    }]
-                }
-                let abilities = res.data.abilities.reverse();
-                for (let i = 0; i < abilities.length; i++) {
-                    abilities[i].ability.name = ucFirst(abilities[i].ability.name);
-                }
-
-                let loading = false;
-
+        let newPokemon = document.getElementById('search-input').value.toLowerCase();
+        getPokemon(newPokemon)
+            .then((obj) => {
                 this.setState({
-                    name: name,
-                    spriteImage: spriteImage,
-                    types: types,
-                    stats: stats,
-                    chartData: chartData,
-                    abilities: abilities,
-                    loading: loading
+                    name: obj.name,
+                    spriteImage: obj.sprite,
+                    types: obj.types,
+                    chartData: obj.chartData,
+                    abilities: obj.abilities,
+                    entry: obj.entry,
+                    moves: obj.moves,
+                    loading: obj.loading
                 });
-            })
-            .catch((error) => {
-                if (error) {
-                    console.log("No Existing Pokemon");
-                }
             })
     }
 
     render() {
         return (
             <div>
-                <div id="search-container">
-                    <center>
-                        <input type="search" id="searchInput" />
-                        <button id="search-button" onClick={this.changePokemon}>
-                            <b>Search</b>
-                        </button>
-                    </center>
+                <div id="move-details-container">
+                    <button id="close-details-button">
+                        <img id="close-icon" src={closeIcon} alt="close window" />
+                    </button>
+                    <div>
+
+                    </div>
                 </div>
 
-                <div id="pokedex-screen">
+                <div id="search-container">
+                    <input type="search" id="search-input" />
+                    <button id="search-button" onClick={this.changePokemon}>
+                        <b>Search</b>
+                    </button>
+                </div>
+
+                <div id="page-container">
 
                     {this.state.loading
                         ? "Loading pokemon..."
@@ -193,28 +109,37 @@ class Controller extends Component {
                             name={this.state.name}
                             spriteImage={this.state.spriteImage}
                             types={this.state.types}
-                            stats={this.state.stats}
                         />}
 
-                    {this.state.loading
-                        ? "Loading Abilties..."
-                        : <AbilityList
-                            abilities={this.state.abilities}
-                            name={this.state.name}
-                        />}
+                    <div id="data-container">
 
-                    <hr />
 
-                    <div id="stat-container">
+                        <h2 id="section-title">Entry</h2>
+                        <p id="flavor-text">
+                            {this.state.entry}
+                        </p>
 
-                        <h3>Base Stats:</h3>
 
-                        {this.state.loading
-                            ? "Loading Stats..."
-                            : <Chart
-                                chartData={this.state.chartData}
-                                name={this.state.name}
-                            />}
+                        <h2 id="section-title">Abilities</h2>
+                        <ul id="ability-list">
+                            {this.state.abilities.map((item) =>
+                                <li key={item.name}>
+                                    <h3 id={"hidden-" + item.hidden} className="ability-name">{item.name}</h3>
+                                    <p className="ability-effect">{item.effect}</p>
+                                </li> 
+                            )}
+                        </ul>
+
+                        <h2 id="section-title">Moves</h2>
+                        <div id="move-list">
+                            {this.state.moves.map((item) =>
+                                <div id={item.move.name} className="move" 
+                                key={item.move.name}
+                                onClick={()=>{moveDetails(item.move.name, this.state.moves)}}>
+                                    {item.move.name}
+                                </div>    
+                            )}
+                        </div>
 
                     </div>
 
