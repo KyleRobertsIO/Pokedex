@@ -90,12 +90,15 @@ function getMoveObj(name, json){
     // Accuracy
     let accuracy = json.accuracy;
     if(accuracy == null){
-        accuracy = "Confirmed";
+        accuracy = 100;
     }
     // PP
     let pp = json.pp;
     // Power
     let power = json.power;
+    if(power == null){
+        power = 0;
+    }
     // Effect
     let effect = json.effect_entries[0].effect;
     let effect_chance = json.effect_chance;
@@ -113,20 +116,33 @@ function getMoveObj(name, json){
         move_class: move_class,
         power: power,
         pp: pp,
-        accuracy: accuracy
+        accuracy: accuracy,
+        effect: effect
     }
     return obj;
 }
 
+function setMoveView(data){
+    document.getElementById('move-title').innerText = data.name;
+    document.getElementById('move-type').innerText = `Type: ${data.type}`;
+    document.getElementById('move-pp').innerText = `PP: ${data.pp}`;
+    document.getElementById('move-class').innerText = `Class: ${data.move_class}`;
+    if(data.move_class.toLowerCase() != "status"){
+        document.getElementById('move-power').innerText = `Power: ${data.power}`;
+    }
+    document.getElementById('move-accuracy').innerText = `Accuracy: ${data.accuracy}%`;
+    document.getElementById('move-effect').innerText = `${data.effect}`;
+}
+
 export async function moveDetails(name, moves) {
     let moveData = {};
+    document.getElementById('move-details-container').style.display = "block";
     for(let i = 0; i < moves.length; i++){
         if(moves[i].move.name === name){
             let moveJSON = await axios.get(moves[i].move.url);
             moveData = getMoveObj(name, moveJSON.data);
+            setMoveView(moveData);
             break;
         }
     }
-
-    //Append data to divs
 }

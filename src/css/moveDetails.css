@@ -4,7 +4,7 @@
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #28253d;
     z-index: 5;
 }
@@ -19,4 +19,37 @@
 #close-icon{
     width: 40px;
     fill: #fff;
+}
+
+#move-data-container{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+}
+
+#move-title{
+    font-size: 30px;
+    padding: 10px;
+    font-weight: bolder;
+}
+
+#type-pp-data, #power-accuracy-data{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px 0px 0px;
+    font-size: 20px;
+}
+
+#move-type, #move-pp, #move-power, #move-accuracy{
+    margin: 0px 20px 0px 20px;
+}
+
+#move-effect{
+    padding: 20px 0px 0px 0px;
+    font-size: 16px;
+    line-height: 1.25;
 }

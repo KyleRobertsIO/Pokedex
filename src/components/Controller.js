@@ -82,14 +82,39 @@ class Controller extends Component {
             })
     }
 
+    removeMoveDetails() {
+        document.getElementById('move-details-container').style.display = "none";
+
+        document.getElementById('move-title').innerText = "";
+        document.getElementById('move-type').innerText = "";
+        document.getElementById('move-pp').innerText = "";
+        document.getElementById('move-class').innerText = "";
+        document.getElementById('move-power').innerText = "";
+        document.getElementById('move-accuracy').innerText = "";
+        document.getElementById('move-effect').innerText = "";
+    }
+
     render() {
         return (
             <div>
                 <div id="move-details-container">
-                    <button id="close-details-button">
+                    <button id="close-details-button" onClick={this.removeMoveDetails}>
                         <img id="close-icon" src={closeIcon} alt="close window" />
                     </button>
-                    <div>
+                    <div id="move-data-container">
+
+                        <h1 id="move-title"></h1>
+                        <h2 id="move-class"></h2>
+                        <div id="type-pp-data">
+                            <h2 id="move-type"></h2>
+                            <h2 id="move-pp"></h2>
+                        </div>
+                        <div id="power-accuracy-data">
+                            <h2 id="move-power"></h2>
+                            <h2 id="move-accuracy"></h2>
+                        </div>
+
+                        <div id="move-effect"></div>
 
                     </div>
                 </div>
@@ -126,18 +151,18 @@ class Controller extends Component {
                                 <li key={item.name}>
                                     <h3 id={"hidden-" + item.hidden} className="ability-name">{item.name}</h3>
                                     <p className="ability-effect">{item.effect}</p>
-                                </li> 
+                                </li>
                             )}
                         </ul>
 
                         <h2 id="section-title">Moves</h2>
                         <div id="move-list">
                             {this.state.moves.map((item) =>
-                                <div id={item.move.name} className="move" 
-                                key={item.move.name}
-                                onClick={()=>{moveDetails(item.move.name, this.state.moves)}}>
+                                <div id={item.move.name} className="move"
+                                    key={item.move.name}
+                                    onClick={() => { moveDetails(item.move.name, this.state.moves) }}>
                                     {item.move.name}
-                                </div>    
+                                </div>
                             )}
                         </div>
 
