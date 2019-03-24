@@ -6,6 +6,7 @@ import '../css/controls.css';
 import '../css/result.css';
 import '../css/moveDetails.css';
 import '../css/typeColor.css';
+import searchIcon from '../assets/icons/search.svg';
 
 import closeIcon from '../assets/icons/close.svg';
 
@@ -21,27 +22,7 @@ class Controller extends Component {
             spriteImage: "",
             entry: "",
             types: [],
-            chartData: {
-                labels: ['HP', 'Attack', 'Defence', 'Spa. Attack', 'Spa. Defence', 'Speed'],
-                datasets: [{
-                    data: [
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                    ],
-                    backgroundColor: [
-                        'rgba(255, 0, 0, 1.0)',
-                        'rgba(244, 164, 66, 1.0)',
-                        'rgba(255, 206, 0, 1.0)',
-                        'rgba(133, 65, 244, 1.0)',
-                        'rgba(244, 65, 217, 1.0)',
-                        'rgba(65, 223, 244, 1.0)'
-                    ]
-                }]
-            },
+            chartData: {},
             abilities: [],
             moves: [],
             loading: true
@@ -60,6 +41,7 @@ class Controller extends Component {
                     abilities: obj.abilities,
                     entry: obj.entry,
                     moves: obj.moves,
+                    chartData: obj.stats,
                     loading: obj.loading
                 });
             })
@@ -69,16 +51,22 @@ class Controller extends Component {
         let newPokemon = document.getElementById('search-input').value.toLowerCase();
         getPokemon(newPokemon)
             .then((obj) => {
-                this.setState({
-                    name: obj.name,
-                    spriteImage: obj.sprite,
-                    types: obj.types,
-                    chartData: obj.chartData,
-                    abilities: obj.abilities,
-                    entry: obj.entry,
-                    moves: obj.moves,
-                    loading: obj.loading
-                });
+                if (obj.exists == true) {
+                    this.setState({
+                        name: obj.name,
+                        spriteImage: obj.sprite,
+                        types: obj.types,
+                        chartData: obj.chartData,
+                        abilities: obj.abilities,
+                        entry: obj.entry,
+                        moves: obj.moves,
+                        chartData: obj.stats,
+                        loading: obj.loading
+                    });
+                    document.getElementById("query-failure-container").style.display = "none";
+                } else {
+                    document.getElementById("query-failure-container").style.display = "block";
+                }
             })
     }
 
@@ -92,6 +80,10 @@ class Controller extends Component {
         document.getElementById('move-power').innerText = "";
         document.getElementById('move-accuracy').innerText = "";
         document.getElementById('move-effect').innerText = "";
+    }
+
+    removeAlertBox(){
+        document.getElementById("query-failure-container").style.display = "none";
     }
 
     render() {
@@ -119,10 +111,20 @@ class Controller extends Component {
                     </div>
                 </div>
 
+                <div id="query-failure-container">
+                    <button id="close-alert-button" onClick={this.removeAlertBox}>
+                        <img id="close-alert-icon" src={closeIcon} alt="close popup" />
+                    </button>
+                    <br/>
+                    <div id="alert-message-container">
+                        <p>Invalid Search Name</p>
+                    </div>
+                </div>
+
                 <div id="search-container">
                     <input type="search" id="search-input" />
                     <button id="search-button" onClick={this.changePokemon}>
-                        <b>Search</b>
+                        <img id="search-icon" src={searchIcon} alt="search button" />
                     </button>
                 </div>
 
@@ -154,6 +156,14 @@ class Controller extends Component {
                                 </li>
                             )}
                         </ul>
+
+                        <h2 id="section-title">Stats</h2>
+                        {this.state.loading
+                            ? "Loading Stats..."
+                            : <Chart
+                                chartData={this.state.chartData}
+                                name={this.state.name}
+                            />}
 
                         <h2 id="section-title">Moves</h2>
                         <div id="move-list">

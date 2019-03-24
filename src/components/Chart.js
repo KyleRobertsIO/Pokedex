@@ -16,12 +16,12 @@ class Chart extends Component{
             <div className="chart">
                 <Bar
                 data={this.props.chartData}
-                width={400}
+                width={520}
                 height={300}
                 options={{
                     maintainAspectRatio: false,
                     legend: {
-                        display: false
+                        display: false,
                     },
                     scales: {
                         xAxes: [{
@@ -30,7 +30,9 @@ class Chart extends Component{
                                 drawBorder: false,
                             },
                             ticks: {
-                                fontColor: "white"
+                                autoSkip: false,
+                                fontColor: "white",
+                                fontSize: 16
                             }
                         }],
                         yAxes: [{

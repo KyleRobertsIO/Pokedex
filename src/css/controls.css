@@ -9,7 +9,7 @@
 }
 
 #search-input{
-    width: 80%;
+    width: calc(100% - 45px);
     padding: 8px 16px 8px 16px;
     color: #fff;
     background-color: #38345c;
@@ -17,9 +17,13 @@
 }
 
 #search-button{
-    width: 20%;
     border: none;
     padding: 10px;
     background-color: #38345c;
     color: #fff;;
+}
+
+#search-icon{
+    width: 25px;
+    height: 25px;
 }
