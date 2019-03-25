@@ -12,7 +12,7 @@ export async function getPokemon(searchPokemon) {
             console.log("Could not query search parameters.");
             existQuery = false;
         })
-    if (existQuery == true) {
+    if (existQuery === true) {
         // Name
         let name = ucFirst(json.data.name);
         // Types 
@@ -133,15 +133,21 @@ function getMoveObj(name, json) {
 }
 
 function setMoveView(data) {
+    document.getElementById('page-container').style.display = "none";
     document.getElementById('move-title').innerText = data.name;
     document.getElementById('move-type').innerText = `Type: ${data.type}`;
     document.getElementById('move-pp').innerText = `PP: ${data.pp}`;
     document.getElementById('move-class').innerText = `Class: ${data.move_class}`;
+    let movePower = document.getElementById('move-power');
     if (data.move_class.toLowerCase() !== "status") {
-        document.getElementById('move-power').innerText = `Power: ${data.power}`;
+        movePower.style.display = "block";
+        movePower.innerText = `Power: ${data.power}`;
+    }else{
+        movePower.style.display = "none";
     }
     document.getElementById('move-accuracy').innerText = `Accuracy: ${data.accuracy}%`;
     document.getElementById('move-effect').innerText = `${data.effect}`;
+    window.scrollTo(0,0);
 }
 
 export async function moveDetails(name, moves) {

@@ -51,7 +51,7 @@ class Controller extends Component {
         let newPokemon = document.getElementById('search-input').value.toLowerCase();
         getPokemon(newPokemon)
             .then((obj) => {
-                if (obj.exists == true) {
+                if (obj.exists === true) {
                     this.setState({
                         name: obj.name,
                         spriteImage: obj.sprite,
@@ -71,6 +71,8 @@ class Controller extends Component {
     }
 
     removeMoveDetails() {
+        document.getElementById('page-container').style.display = "block"
+
         document.getElementById('move-details-container').style.display = "none";
 
         document.getElementById('move-title').innerText = "";
@@ -82,7 +84,7 @@ class Controller extends Component {
         document.getElementById('move-effect').innerText = "";
     }
 
-    removeAlertBox(){
+    removeAlertBox() {
         document.getElementById("query-failure-container").style.display = "none";
     }
 
@@ -97,12 +99,12 @@ class Controller extends Component {
 
                         <h1 id="move-title"></h1>
                         <h2 id="move-class"></h2>
-                        <div id="type-pp-data">
+                        <div id="type-power-data">
                             <h2 id="move-type"></h2>
-                            <h2 id="move-pp"></h2>
-                        </div>
-                        <div id="power-accuracy-data">
                             <h2 id="move-power"></h2>
+                        </div>
+                        <div id="pp-accuracy-data">
+                            <h2 id="move-pp"></h2>
                             <h2 id="move-accuracy"></h2>
                         </div>
 
@@ -115,7 +117,7 @@ class Controller extends Component {
                     <button id="close-alert-button" onClick={this.removeAlertBox}>
                         <img id="close-alert-icon" src={closeIcon} alt="close popup" />
                     </button>
-                    <br/>
+                    <br />
                     <div id="alert-message-container">
                         <p>Invalid Search Name</p>
                     </div>

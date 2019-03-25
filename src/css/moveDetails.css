@@ -1,10 +1,11 @@
 #move-details-container{
     display: none;
-    position: fixed;
+    position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
     min-height: 100vh;
+    height: auto;
     background-color: #28253d;
     z-index: 5;
 }
@@ -37,15 +38,15 @@
     font-weight: bolder;
 }
 
-#type-pp-data, #power-accuracy-data{
+#type-power-data, #pp-accuracy-data{
     display: flex;
     justify-content: center;
     padding: 20px 0px 0px 0px;
     font-size: 20px;
 }
 
-#move-type, #move-pp, #move-power, #move-accuracy{
-    margin: 0px 20px 0px 20px;
+#move-type, #move-power, #move-pp, #move-accuracy{
+    margin: 0px 14px 0px 14px;
 }
 
 #move-effect{

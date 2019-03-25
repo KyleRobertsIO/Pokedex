@@ -4,7 +4,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #38345c;
+    background-color: #48416b;
     padding: 5px 0px;
 }
 
@@ -12,14 +12,14 @@
     width: calc(100% - 45px);
     padding: 8px 16px 8px 16px;
     color: #fff;
-    background-color: #38345c;
+    background-color: #48416b;
     border: none;
 }
 
 #search-button{
     border: none;
     padding: 10px;
-    background-color: #38345c;
+    background-color: #48416b;
     color: #fff;;
 }
 

@@ -16,8 +16,6 @@ class Display extends Component {
 
                 <div id="image-display">
                     <img id="pokemon-image" src={this.props.spriteImage} alt={this.props.name} />
-                    {/*<img id="pokemon-image" src={"http://play.pokemonshowdown.com/sprites/xyani/" +
-                    this.props.name.toLowerCase() + ".gif"} />*/}
                 </div>
 
                 <div id="basic-info-container">
@@ -46,26 +44,3 @@ class Display extends Component {
 }
 
 export default Display;
-
-/*
-    <div id="sprite-container">
-                    <img id="sprite" alt="pokemon" src={this.props.spriteImage} />
-                    <h1 id="pokemon-name">{this.props.name}</h1>
-                </div>
-
-                <ul id="type-container">
-
-                    {this.props.types.length === 1
-                        ? <li className="type-icon" id={this.props.types[0].type.name}>
-                            <b>{this.props.types[0].type.name}</b>
-                        </li>
-                        : <div>
-                            <li className="type-icon" id={this.props.types[0].type.name}>
-                                <b>{this.props.types[0].type.name}</b>
-                            </li>
-                            <li className="type-icon" id={this.props.types[1].type.name}>
-                                <b>{this.props.types[1].type.name}</b>
-                            </li>
-                        </div>}
-                </ul>
-*/
