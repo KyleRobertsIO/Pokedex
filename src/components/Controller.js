@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Display from './Display';
 import Chart from './Chart';
+import Loading from './Loading';
 import { getPokemon, moveDetails } from '../js/api.js';
 import '../css/controls.css';
 import '../css/result.css';
 import '../css/moveDetails.css';
 import '../css/typeColor.css';
 import searchIcon from '../assets/icons/search.svg';
-
 import closeIcon from '../assets/icons/close.svg';
 
 var pokemon = 'aron';
@@ -31,6 +31,7 @@ class Controller extends Component {
     }
 
     componentDidMount() {
+        document.getElementById('loading-screen').style.display = "flex";
         getPokemon(pokemon)
             .then((obj) => {
                 this.setState({
@@ -45,9 +46,11 @@ class Controller extends Component {
                     loading: obj.loading
                 });
             })
+            document.getElementById('loading-screen').style.display = "none";
     }
 
     changePokemon() {
+        document.getElementById('loading-screen').style.display = "flex";
         let newPokemon = document.getElementById('search-input').value.toLowerCase();
         getPokemon(newPokemon)
             .then((obj) => {
@@ -64,8 +67,10 @@ class Controller extends Component {
                         loading: obj.loading
                     });
                     document.getElementById("query-failure-container").style.display = "none";
+                    document.getElementById('loading-screen').style.display = "none";
                 } else {
                     document.getElementById("query-failure-container").style.display = "block";
+                    document.getElementById('loading-screen').style.display = "none";
                 }
             })
     }
@@ -91,6 +96,9 @@ class Controller extends Component {
     render() {
         return (
             <div>
+
+                <Loading />
+
                 <div id="move-details-container">
                     <button id="close-details-button" onClick={this.removeMoveDetails}>
                         <img id="close-icon" src={closeIcon} alt="close window" />
