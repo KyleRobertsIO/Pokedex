@@ -10,7 +10,33 @@ import '../css/typeColor.css';
 import searchIcon from '../assets/icons/search.svg';
 import closeIcon from '../assets/icons/close.svg';
 
-var pokemon = 'aron';
+var pokemon = 'ho-oh';
+
+function queryHandler(stateObj){
+    document.getElementById('loading-screen').style.display = "flex";
+        let newPokemon = document.getElementById('search-input').value.toLowerCase();
+        getPokemon(newPokemon)
+            .then((obj) => {
+                if (obj.exists === true) {
+                    stateObj.setState({ 
+                        name: obj.name,
+                        spriteImage: obj.sprite,
+                        types: obj.types,
+                        chartData: obj.chartData,
+                        abilities: obj.abilities,
+                        entry: obj.entry,
+                        moves: obj.moves,
+                        chartData: obj.stats,
+                        loading: obj.loading
+                    });
+                    document.getElementById("query-failure-container").style.display = "none";
+                    document.getElementById('loading-screen').style.display = "none";
+                } else {
+                    document.getElementById("query-failure-container").style.display = "block";
+                    document.getElementById('loading-screen').style.display = "none";
+                }
+            })
+}
 
 class Controller extends Component {
     constructor(props) {
@@ -28,6 +54,7 @@ class Controller extends Component {
             loading: true
         };
         this.changePokemon = this.changePokemon.bind(this);
+        this.pressEnterSearch = this.pressEnterSearch.bind(this);
     }
 
     componentDidMount() {
@@ -46,33 +73,17 @@ class Controller extends Component {
                     loading: obj.loading
                 });
             })
-            document.getElementById('loading-screen').style.display = "none";
+        document.getElementById('loading-screen').style.display = "none";
     }
 
     changePokemon() {
-        document.getElementById('loading-screen').style.display = "flex";
-        let newPokemon = document.getElementById('search-input').value.toLowerCase();
-        getPokemon(newPokemon)
-            .then((obj) => {
-                if (obj.exists === true) {
-                    this.setState({
-                        name: obj.name,
-                        spriteImage: obj.sprite,
-                        types: obj.types,
-                        chartData: obj.chartData,
-                        abilities: obj.abilities,
-                        entry: obj.entry,
-                        moves: obj.moves,
-                        chartData: obj.stats,
-                        loading: obj.loading
-                    });
-                    document.getElementById("query-failure-container").style.display = "none";
-                    document.getElementById('loading-screen').style.display = "none";
-                } else {
-                    document.getElementById("query-failure-container").style.display = "block";
-                    document.getElementById('loading-screen').style.display = "none";
-                }
-            })
+        queryHandler(this);
+    }
+
+    pressEnterSearch(e){
+        if (e.charCode == 13) {
+            queryHandler(this);
+        }
     }
 
     removeMoveDetails() {
@@ -132,7 +143,7 @@ class Controller extends Component {
                 </div>
 
                 <div id="search-container">
-                    <input type="search" id="search-input" placeholder="Search" />
+                    <input type="search" id="search-input" onKeyPress={(this.pressEnterSearch)} placeholder="Search" />
                     <button id="search-button" onClick={this.changePokemon}>
                         <img id="search-icon" src={searchIcon} alt="search button" />
                     </button>
