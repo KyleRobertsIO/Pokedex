@@ -132,7 +132,7 @@ class Controller extends Component {
                 </div>
 
                 <div id="search-container">
-                    <input type="search" id="search-input" />
+                    <input type="search" id="search-input" placeholder="Search" />
                     <button id="search-button" onClick={this.changePokemon}>
                         <img id="search-icon" src={searchIcon} alt="search button" />
                     </button>
