@@ -16,6 +16,10 @@
     border: none;
 }
 
+#search-input::placeholder{
+    color: #fff;
+}
+
 #search-button{
     border: none;
     padding: 10px;

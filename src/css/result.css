@@ -75,7 +75,6 @@ body{
 #ability-list{
     font-family: 'Roboto', sans-serif;
     color: #fff;
-    font-weight: lighter;
     font-size: 16px;
 }
 
@@ -83,7 +82,9 @@ body{
     font-weight: bolder;
     font-size: 20px;
     margin: 0px 0px 8px 0px;
+    padding: 0px 10px;
     font-weight: bolder;
+    line-height: 1.5;
 }
 
 #hidden-false{
@@ -95,7 +96,7 @@ body{
 }
 
 .ability-effect{
-    font-size: 14px;
+    font-size: 16px;
     padding: 0px 10px 10px 10px;
     line-height: 1.25;
 }

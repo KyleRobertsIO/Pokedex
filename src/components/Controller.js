@@ -10,7 +10,7 @@ import '../css/typeColor.css';
 import searchIcon from '../assets/icons/search.svg';
 import closeIcon from '../assets/icons/close.svg';
 
-var pokemon = 'ho-oh';
+var pokemon = 'pikachu';
 
 function queryHandler(stateObj){
     document.getElementById('loading-screen').style.display = "flex";
@@ -22,7 +22,6 @@ function queryHandler(stateObj){
                         name: obj.name,
                         spriteImage: obj.sprite,
                         types: obj.types,
-                        chartData: obj.chartData,
                         abilities: obj.abilities,
                         entry: obj.entry,
                         moves: obj.moves,
@@ -41,7 +40,6 @@ function queryHandler(stateObj){
 class Controller extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             pokemon: pokemon,
             name: "",
@@ -65,7 +63,6 @@ class Controller extends Component {
                     name: obj.name,
                     spriteImage: obj.sprite,
                     types: obj.types,
-                    chartData: obj.chartData,
                     abilities: obj.abilities,
                     entry: obj.entry,
                     moves: obj.moves,
@@ -81,16 +78,14 @@ class Controller extends Component {
     }
 
     pressEnterSearch(e){
-        if (e.charCode == 13) {
+        if (e.charCode === 13) {
             queryHandler(this);
         }
     }
 
     removeMoveDetails() {
         document.getElementById('page-container').style.display = "block"
-
         document.getElementById('move-details-container').style.display = "none";
-
         document.getElementById('move-title').innerText = "";
         document.getElementById('move-type').innerText = "";
         document.getElementById('move-pp').innerText = "";
@@ -107,9 +102,7 @@ class Controller extends Component {
     render() {
         return (
             <div>
-
                 <Loading />
-
                 <div id="move-details-container">
                     <button id="close-details-button" onClick={this.removeMoveDetails}>
                         <img id="close-icon" src={closeIcon} alt="close window" />
@@ -143,7 +136,7 @@ class Controller extends Component {
                 </div>
 
                 <div id="search-container">
-                    <input type="search" id="search-input" onKeyPress={(this.pressEnterSearch)} placeholder="Search" />
+                    <input type="search" id="search-input" onKeyPress={(this.pressEnterSearch)} placeholder="Search with name or numbers" />
                     <button id="search-button" onClick={this.changePokemon}>
                         <img id="search-icon" src={searchIcon} alt="search button" />
                     </button>
