@@ -3,7 +3,7 @@ body{
 }
 
 #page-container{
-    margin-top: 48px;
+    margin-top: 55px;
 }
 
 #image-display{
@@ -112,6 +112,7 @@ body{
 .move{
     padding: 0px 20px;
     line-height: 2;
+    cursor: pointer;
 }
 
 #query-failure-container{

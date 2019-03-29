@@ -15,10 +15,18 @@
     color: #fff;
     background-color: #48416b;
     border: none;
+    transition: 0.5s;
 }
 
 #search-input::placeholder{
     color: #fff;
+}
+
+#search-input:focus{
+    background-color: #28253d;
+    border-radius: 5px;
+    transition: 0.5s;
+    transition-timing-function: ease-out;
 }
 
 #search-button{
@@ -31,4 +39,13 @@
 #search-icon{
     width: 25px;
     height: 25px;
+}
+
+@media screen and (min-width: 1100px){
+    #search-container{
+        justify-content: center;
+    }
+    #search-input{
+        width: 25%;
+    }
 }

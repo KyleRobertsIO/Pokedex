@@ -5,6 +5,7 @@ import Loading from './Loading';
 import { getPokemon, moveDetails } from '../js/api.js';
 import '../css/controls.css';
 import '../css/result.css';
+import '../css/desktopScaling.css';
 import '../css/moveDetails.css';
 import '../css/typeColor.css';
 import searchIcon from '../assets/icons/search.svg';
