@@ -11,7 +11,7 @@ import '../css/typeColor.css';
 import searchIcon from '../assets/icons/search.svg';
 import closeIcon from '../assets/icons/close.svg';
 
-var pokemon = 'pikachu';
+var pokemon = "pikachu";
 
 function queryHandler(stateObj){
     document.getElementById('loading-screen').style.display = "flex";
@@ -132,7 +132,7 @@ class Controller extends Component {
                     </button>
                     <br />
                     <div id="alert-message-container">
-                        <p>Invalid Search Name</p>
+                        <p>Invalid Search Parameter</p>
                     </div>
                 </div>
 
@@ -197,7 +197,6 @@ class Controller extends Component {
             </div>
         )
     }
-
 }
 
 export default Controller;
