@@ -13,29 +13,29 @@ import closeIcon from '../assets/icons/close.svg';
 
 var pokemon = "pikachu";
 
-function queryHandler(stateObj){
+function queryHandler(stateObj) {
     document.getElementById('loading-screen').style.display = "flex";
-        let newPokemon = document.getElementById('search-input').value.toLowerCase();
-        getPokemon(newPokemon)
-            .then((obj) => {
-                if (obj.exists === true) {
-                    stateObj.setState({ 
-                        name: obj.name,
-                        spriteImage: obj.sprite,
-                        types: obj.types,
-                        abilities: obj.abilities,
-                        entry: obj.entry,
-                        moves: obj.moves,
-                        chartData: obj.stats,
-                        loading: obj.loading
-                    });
-                    document.getElementById("query-failure-container").style.display = "none";
-                    document.getElementById('loading-screen').style.display = "none";
-                } else {
-                    document.getElementById("query-failure-container").style.display = "block";
-                    document.getElementById('loading-screen').style.display = "none";
-                }
-            })
+    let newPokemon = document.getElementById('search-input').value.toLowerCase();
+    getPokemon(newPokemon)
+        .then((obj) => {
+            if (obj.exists === true) {
+                stateObj.setState({
+                    name: obj.name,
+                    spriteImage: obj.sprite,
+                    types: obj.types,
+                    abilities: obj.abilities,
+                    entry: obj.entry,
+                    moves: obj.moves,
+                    chartData: obj.stats,
+                    loading: obj.loading
+                });
+                document.getElementById("query-failure-container").style.display = "none";
+                document.getElementById('loading-screen').style.display = "none";
+            } else {
+                document.getElementById("query-failure-container").style.display = "block";
+                document.getElementById('loading-screen').style.display = "none";
+            }
+        })
 }
 
 class Controller extends Component {
@@ -70,15 +70,15 @@ class Controller extends Component {
                     chartData: obj.stats,
                     loading: obj.loading
                 });
+                document.getElementById('loading-screen').style.display = "none";
             })
-        document.getElementById('loading-screen').style.display = "none";
     }
 
     changePokemon() {
         queryHandler(this);
     }
 
-    pressEnterSearch(e){
+    pressEnterSearch(e) {
         if (e.charCode === 13) {
             queryHandler(this);
         }
@@ -137,7 +137,7 @@ class Controller extends Component {
                 </div>
 
                 <div id="search-container">
-                    <input type="search" id="search-input" onKeyPress={(this.pressEnterSearch)} placeholder="Search with name or numbers" />
+                    <input type="search" id="search-input" onKeyPress={(this.pressEnterSearch)} placeholder="Search by name or number" />
                     <button id="search-button" onClick={this.changePokemon}>
                         <img id="search-icon" src={searchIcon} alt="search button" />
                     </button>
